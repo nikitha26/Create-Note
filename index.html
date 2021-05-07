@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durbin Task</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+        $('document').ready(function(){
+            $('#btn').click(function(){
+                var title = $('.title').val()
+                var description = $('.des').val()
+                //console.log(title)
+                var inputvalues = {
+                   title: title,
+                   description: description,
+                };
+                console.log(inputvalues)
+                     axios({
+                        method: 'post',
+                         url: 'https://reminders-task.hiring.durbin.live/note',
+                         data:inputvalues,
+                     })
+                     .then((response) => {
+                        console.log(response);
+                        
+                    }, (error) => {
+                        console.log(error);
+                        });
+             })
+        })
+    </script>
+</head>
+<body>
+    <h2>Durbin Task</h2>
+    <form action="">
+        <input type="text" placeholder="Enter Title" class="title">
+        <input type="text" placeholder="Enter Description" class="des">
+        <input type="button" name="btn" value="Submit" id="btn">
+    </form>
+</body>
+</html>
