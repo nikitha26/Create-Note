@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Method</title>
+    <link rel="stylesheet" href="get.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -21,18 +22,31 @@
             var x = response.data;
             var y = x['data'];
             var z = y.notes;
-            console.log(z[0])
-            
+            console.log(z)
+           
+            let cardContentForFilling = '<div class="col-lg-4"><div class="card mb-4 box-shadow"><div class="card-body"><p class="card-text"><h6 href="#" class="text-right">Update</h6></p></div></div></div>';
+
+                for (let i = 0; i < z.length; i++) {
+                    $('.append-here').append(cardContentForFilling);
+                    let cards = $('.card-text');
+                    cards.eq(i).html((z[i]["title"]) +"<br>"+z[i].description);
+                }
+            // console.log(z[1])
+
         }, (error) => {
             console.log(error);
             });
-           $('ol').append()
        });
   </script>
 </head>
 <body>
-    <ol>
-        <li></li>
-    </ol>
+    <div class="album py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">YOUR NOTES HERE</h2>
+          <div class="row append-here">
+             
+          </div>
+        </div>
+      </div>
 </body>
 </html>
