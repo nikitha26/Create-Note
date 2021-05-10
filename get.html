@@ -22,13 +22,20 @@
             var x = response.data;
             var y = x['data'];
             var z = y.notes;
-            console.log(z)
+            //console.log(z)
            
-            let cardContentForFilling = '<div class="col-lg-4"><div class="card mb-4 box-shadow"><div class="card-body"><p class="card-text"><h6 href="#" class="text-right">Update</h6></p></div></div></div>';
+            //let cardContentForFilling = '<div class="col-lg-4"><div class="card mb-4 box-shadow"><div class="card-body"><a href="file:///C:/Users/Prasad/Desktop/react/Durbin%20Task/newpage.html?"><p class="card-text"></p></a></div></div></div>';
 
                 for (let i = 0; i < z.length; i++) {
+                    let id = z[i].id;
+
+                    var first = '<div class="col-lg-4"><div class="card mb-4 box-shadow"><div class="card-body"><a href="file:///C:/Users/Prasad/Desktop/react/Durbin%20Task/updatenote.html?id='
+                    var second = '"><p class="card-text"></p></a></div></div></div>'
+                    let cardContentForFilling = first+id+second;
                     $('.append-here').append(cardContentForFilling);
+                    //console.log(cardContentForFilling)
                     let cards = $('.card-text');
+                    console.log(id)
                     cards.eq(i).html((z[i]["title"]) +"<br>"+z[i].description);
                 }
             // console.log(z[1])
@@ -37,6 +44,8 @@
             console.log(error);
             });
        });
+       
+      
   </script>
 </head>
 <body>

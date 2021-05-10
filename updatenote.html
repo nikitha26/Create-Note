@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UpdateNote</title>
+    <link rel="stylesheet" href="get.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mt-5">UPDATA PAGE</h2>
+        <form action="">
+          <div class="form-group">
+                <label for="text">Enter Notes</label>
+                <input type="text" class="form-control" id="titleform" placeholder="Enter Notes">
+           </div>
+          <div class="form-group">
+                <label for="text">Enter Description</label>
+                <input type="text" class="form-control" id="descriptionform" placeholder="Enter Description">
+          </div>
+          <button type="button" class="btn btn-primary" id="updatebtn">Update Note</button>
+        </form>
+      </div>
+</body>
+<script>
+    $(window).on("load" , function() {
+        var url = window.location.href
+        var id = url.split("=")
+        //console.log(id[1])
+        axios({
+            method: 'get',
+            url: 'https://reminders-task.hiring.durbin.live/note/'+id[1],
+        })
+        .then((response)=>{
+          var raw_data = response;
+          var data = response.data;
+          var note = data['data'];
+          var x = note.note
+
+          var title = x.title;
+          var description = x.description
+
+          //console.log(x.title + description)
+      
+          $('#titleform').val(title);
+          $('#descriptionform').val(description);
+
+        }), (error) =>{
+            console.log("Error")
+        };
+    })
+    $('#updatebtn').click(function(){
+        var url = window.location.href
+        var id = url.split("=")
+        console.log(id[1])
+      var title = $('#titleform').val();
+      var description = $('#descriptionform').val();
+      
+      var update_values = {
+          title:title,
+          description:description
+      }
+      console.log(update_values.title)
+            axios({
+                    method: 'put',
+                    url: 'https://reminders-task.hiring.durbin.live/note/'+id[1],
+                    data:update_values,
+                })
+                .then((response) => {
+                console.log(update_values.description)
+                console.log("Added Successfully")
+                 window.location.replace("detailpage.html?id="+id[1])
+
+            }, (error) => {
+                console.log(error);
+                });
+    })
+</script>
+</html>
