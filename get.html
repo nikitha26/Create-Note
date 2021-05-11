@@ -26,17 +26,19 @@
            
             //let cardContentForFilling = '<div class="col-lg-4"><div class="card mb-4 box-shadow"><div class="card-body"><a href="file:///C:/Users/Prasad/Desktop/react/Durbin%20Task/newpage.html?"><p class="card-text"></p></a></div></div></div>';
 
-                for (let i = 0; i < z.length; i++) {
-                    let id = z[i].id;
-
+                for (var i = 0; i < z.length; i++) {
+                    var id = z[i].id;
+                     
                     var first = '<div class="col-lg-4"><div class="card mb-4 box-shadow"><div class="card-body"><a href="file:///C:/Users/Prasad/Desktop/react/Durbin%20Task/updatenote.html?id='
-                    var second = '"><p class="card-text"></p></a></div></div></div>'
-                    let cardContentForFilling = first+id+second;
+                    var second = '"><p class="card-text"></p></a></div><div class="card-footer"><button class="btn btn-danger btn-sm" id="deletebtn"><a href="file:///C:/Users/Prasad/Desktop/react/Durbin%20Task/get.html?id='
+                    var third ='">Delete</a></button></div></div></div>';
+                    let cardContentForFilling = first+id+second+id+third;
                     $('.append-here').append(cardContentForFilling);
                     //console.log(cardContentForFilling)
                     let cards = $('.card-text');
-                    console.log(id)
+                   // console.log(id)
                     cards.eq(i).html((z[i]["title"]) +"<br>"+z[i].description);
+                  
                 }
             // console.log(z[1])
 
@@ -44,8 +46,6 @@
             console.log(error);
             });
        });
-       
-      
   </script>
 </head>
 <body>
@@ -57,5 +57,6 @@
           </div>
         </div>
       </div>
+      
 </body>
 </html>
