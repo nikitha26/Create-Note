@@ -1,63 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Durbin Task</title>
-    <link rel="stylesheet" href="index.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Method</title>
+  <link rel="stylesheet" href="get.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-    <script>
-        $('document').ready(function(){
-            $('#btn').click(function(){
-                var title = $('.title').val()
-                var description = $('.des').val()
-                //console.log(title)
-                var inputvalues = {
-                   title: title,
-                   description: description,
-                };
-                console.log(inputvalues)
-                     axios({
-                        method: 'post',
-                         url: 'https://reminders-task.hiring.durbin.live/note',
-                         data:inputvalues,
-                     })
-                     .then((response) => {
-                        console.log("Added Successfully")
-                        window.location.replace("file:///C:/Users/Prasad/Desktop/react/Durbin%20Task/get.html?source=addnote",'_blank')
-
-                    }, (error) => {
-                        console.log(error);
-                        });
+  <script>
+    $(window).on("load", function () {
+      axios({
+        method: 'get',
+        url: 'https://reminders-task.hiring.durbin.live/notes',
+      })
+        .then((response) => {
+          var x = response.data;
+          var y = x['data'];
+          var z = y.notes;
+          for (var i = 0; i < z.length; i++) {
+            var id = z[i].id;
+            var first = '<div class="col-lg-4"><div class="card mb-4 box-shadow"><div class="card-body"><a href="detailpage.html?id='
+            var second = '"><p class="card-text"></p></a></div><div class="card-footer"><button class="btn btn-danger deletebtn btn-sm" id="'
+            var third = '"">Delete</button></div></div></div>';
+            let cardContentForFilling = first + id + second + id + third;
+            $('.append-here').append(cardContentForFilling);
+            let cards = $('.card-text');
+            cards.eq(i).html((z[i]["title"]) + "<br>" + z[i].description);
+            
+          }
+          $('.deletebtn').click(function () {
+            var deleteid = this.id;
+            axios({
+              method: 'delete',
+              url: 'https://reminders-task.hiring.durbin.live/note/' + deleteid,
             })
-
-            // Get Notes function
-                    
-        })
-    </script>
+              .then((response) => {
+                axios({
+                  method: 'get',
+                  url: 'https://reminders-task.hiring.durbin.live/notes',
+                })
+                  .then((response) => {
+                    var raw_data = response.data;
+                    console.log(raw_data)
+                    window.location.reload()
+                    console.log(raw_data)
+                  })
+              })
+          })
+        }, (error) => {
+          console.log(error);
+        });
+    });
+  </script>
 </head>
+
 <body>
-    <h2 class="text-center">Dashboard</h2>
+  <div class="album py-5">
     <div class="container">
-        <form action="">
-          <div class="form-group">
-                <label for="text">Enter Notes</label>
-                <input type="text" class="form-control title" placeholder="Enter Notes">
-           </div>
-          <div class="form-group">
-                <label for="text">Enter Description</label>
-                <input type="text" class="form-control des" placeholder="Enter Description">
-          </div>
-          <button type="button" class="btn btn-primary" id="btn">ADD Notes</button>
-          <button type="button" class="btn btn-danger" id="get">GET Notes</button>
-          
-        </form>
+      <div class="row">
+        <div class="col-lg-3">
+          <button class="btn btn-warning"><a href="index2.html">Add One More Note</a></button>
+        </div>
+        <div class="col-lg-9">
+          <h2>YOUR NOTES HERE</h2>
+        </div>
       </div>
+      <div class="row append-here mt-5">
+      </div>
+    </div>
+  </div>
 
 </body>
+
 </html>

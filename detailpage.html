@@ -1,43 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DetailPage</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DetailPage</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
   <script>
-      $(window).on("load",function(){
-        var url = window.location.href
-        var id = url.split("=")
-        axios({
-            method: 'get',
-            url: 'https://reminders-task.hiring.durbin.live/note/'+id[1],
-        })
-        .then((response)=>{
-            var raw_data = response
-            var data = raw_data.data
-            var data1 =data.data
-            var raw_note = data1.note
-             $('.append-here').append('<div class="offset-3 col-lg-6"><div class="card mb-4 box-shadow"><div class="card-body"><p class="card-text"></p></a></div></div></div>')
-                let cards = $('.card-text');
-                    cards.html(raw_note.title +"<br>"+raw_note.description);
-        })
+    $(window).on("load", function () {
+      var url = window.location.href
+      var id = url.split("=")
+      axios({
+        method: 'get',
+        url: 'https://reminders-task.hiring.durbin.live/note/' + id[1],
       })
+        .then((response) => {
+          var raw_data = response
+          var data = raw_data.data
+          var data1 = data.data
+          var raw_note = data1.note
+          $('.append-here').append('<div class="offset-3 col-lg-6"><div class="card mt-5 mb-4 box-shadow"><div class="card-body"><p class="card-text"></p></div><button class="btn btn-warning"><a href="updatenote.html">Update Note</a></button><button class="btn btn-warning"><a href="index2.html">Add New Note</a></button></div></div>')
+          let cards = $('.card-text');
+          cards.html(raw_note.title + "<br>" + raw_note.description);
+        })
+    })
   </script>
 </head>
+
 <body>
-    <div class="album py-5">
-        <div class="container">
-            <h2 class="text-center" style="color:orangered">Detail Page</h2>
-          <div class="row append-here">
-             
-          </div>
+  <div class="album py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 mt-3">
+          <button class="btn btn-warning"><a href="index2.html">Add One More Note</a></button>
+        </div>
+        <div class="col-lg-7">
+          <h2 class="text-center" style="color:orangered">Detail Page</h2>
         </div>
       </div>
+      <div class="row append-here">
+
+      </div>
+    </div>
+  </div>
 </body>
+<!-- <button class="btn btn-warning">
+  <a href="updatenote.html">Delete Note</a>
+</button> -->
+</div></div></div>
 </html>
