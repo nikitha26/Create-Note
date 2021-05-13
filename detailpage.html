@@ -24,7 +24,7 @@
           var data = raw_data.data
           var data1 = data.data
           var raw_note = data1.note
-          $('.append-here').append('<div class="offset-3 col-lg-6"><div class="card mt-5 mb-4 box-shadow"><div class="card-body"><p class="card-text"></p></div><button class="btn btn-warning"><a href="updatenote.html">Update Note</a></button><button class="btn btn-warning"><a href="index2.html">Add New Note</a></button></div></div>')
+          $('.append-here').append('<div class="offset-3 col-lg-6"><div class="card mt-5 mb-4 box-shadow"><div class="card-body"><p class="card-text"></p></div><button class="btn btn-warning mt-4"><a href="index2.html">Add New Note</a></button></div></div>')
           let cards = $('.card-text');
           cards.html(raw_note.title + "<br>" + raw_note.description);
         })

@@ -37,7 +37,7 @@
   $(window).on("load", function () {
     var url = window.location.href
     var id = url.split("=")
-    //console.log(id[1])
+    console.log(id[1])
     axios({
       method: 'get',
       url: 'https://reminders-task.hiring.durbin.live/note/' + id[1],
